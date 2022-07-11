@@ -1,0 +1,24 @@
+name: versionist
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  versionist:
+    runs-on: ubuntu-22.04
+    if: "!contains(github.event.head_commit.author.name, 'versionist')"
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+
+    - uses: ./
+      with:
+        github_email: "versionist@users.noreply.github.com"
+        github_username: 'versionist'
+        github_token: ${{ secrets.GH_VERSIONIST_TOKEN }}
+        branch: master
