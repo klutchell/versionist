@@ -50,7 +50,7 @@ function get_repo_type () {
   local REPO_TYPE=generic
 
   if [[ -f repo.yml ]]; then
-    REPO_TYPE="$(yq r repo.yml type)"
+    REPO_TYPE="$(yq e '.type' repo.yml)"
     REPO_TYPE=${REPO_TYPE:-generic}
   fi
 
