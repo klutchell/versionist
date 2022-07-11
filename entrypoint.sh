@@ -64,6 +64,9 @@ function run_versionist () {
   echo "Running balena-versionist..."
   echo "Current version: $CURRENT_VERSION"
 
+  # Fix for https://github.com/actions/checkout/issues/760
+  git config --global --add safe.directory /github/workspace
+
   # Setup GitHub
   git config --local user.email "$INPUT_GITHUB_EMAIL"
   git config --local user.name "$INPUT_GITHUB_USERNAME"
